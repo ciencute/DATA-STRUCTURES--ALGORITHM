@@ -17,9 +17,6 @@ void KhoiTao(LIST &l){
 }
 NODE *KhoiTaoNode(int x){
     NODE *p = new NODE();
-    if (p==NULL) {
-        cout<<"khong du bo nho de cap phat";
-    }
         p->data = x;
         p->pNext = NULL;
         return  p;
@@ -27,23 +24,41 @@ NODE *KhoiTaoNode(int x){
 void themVaoDau(LIST &l, NODE *p){
     if (l.pHead ==NULL) {
         l.pHead = l.pTail = p;
+        return;
     }
-    p->pNext = l.pHead;
-    l.pHead = p;
+        p->pNext = l.pHead;
+        l.pHead = p;
+    // x = 1
+    //v1 null == null
+    //  p = 1 p head = null
+    // phead = 1
+    // tail = 1
+    // v2
+    // x = 2
+    // v2 // node ddau tro den phead
+    // head = 2
+    //head = 3
+    // tail == 1
+     
     
+    
+   
     
 }
 void thamVaoCuoi(LIST &l, NODE *p){
     if (l.pHead ==  NULL) {
         l.pHead = l.pHead = p;
+        return;
     }
     l.pTail->pNext = p;
     l.pTail = p;
 }
 void xuatLinkList(LIST l){
-    for (NODE *k = l.pHead; k->pNext!= NULL; k = k->pNext) {
+    for (NODE *k = l.pHead; k!= NULL; k= k->pNext) {
         cout<<"gia tri tung node = "<<k->data<<endl;
     }
+   
+    
 }
 int main(int argc, const char * argv[]) {
     LIST l;
