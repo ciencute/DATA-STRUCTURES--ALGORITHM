@@ -4,45 +4,61 @@ struct node{
     int data;
     struct node *pNext;
 };
-typedef struct node NODE;
+typedef node NODE;
 struct list{
-    NODE *pHead;// dau danh sach
-    NODE *pTail;// cuoi danh sach
+    node *pHead;
+    node *pTail;
 };
-typedef struct list LIST;
+
+typedef list LIST;
 void KhoiTao(LIST &l){
     l.pHead = NULL;
     l.pTail = NULL;
 }
-NODE *KhoiTaoNODE(int x){
- 
-    NODE *p = new NODE;// khoi tao cap phat vung nho cho node p
-    if (p == NULL) {
+NODE *KhoiTaoNode(int x){
+    NODE *p = new NODE();
+    if (p==NULL) {
         cout<<"khong du bo nho de cap phat";
-        return NULL;
     }
-    p->data = x;
-    p->pNext = NULL;
-    return p;
+        p->data = x;
+        p->pNext = NULL;
+        return  p;
 }
-void ThemVaoDau(LIST &l, NODE *p){
-    if (l.pHead == NULL) {
-        l.pHead = l.pTail =p;
-    }else{
-        p->pNext = l.pHead;
-        l.pHead = p;
+void themVaoDau(LIST &l, NODE *p){
+    if (l.pHead ==NULL) {
+        l.pHead = l.pTail = p;
     }
+    p->pNext = l.pHead;
+    l.pHead = p;
+    
+    
 }
-void ThemVaoCuoi(LIST &l, NODE *p){
-    if (l.pTail == NULL) {
-        l.pHead = l.pTail =p;
-    }else{
-        l.pTail->pNext =p;
-        l.pTail =p;
-        
+void thamVaoCuoi(LIST &l, NODE *p){
+    if (l.pHead ==  NULL) {
+        l.pHead = l.pHead = p;
+    }
+    l.pTail->pNext = p;
+    l.pTail = p;
+}
+void xuatLinkList(LIST l){
+    for (NODE *k = l.pHead; k->pNext!= NULL; k = k->pNext) {
+        cout<<"gia tri tung node = "<<k->data<<endl;
     }
 }
 int main(int argc, const char * argv[]) {
-    
+    LIST l;
+    KhoiTao(l);
+    int n;
+    cout<<"nhap so luong node can them"<<endl;
+    cin>>n;
+    for (int i = 1; i<=n; i++) {
+        int x;
+        cout<<"Nhap gia tri so nguyen"<<endl;
+        cin>>x;
+        NODE *p = KhoiTaoNode(x);
+        themVaoDau(l, p);
+    }
+    cout<<"========danh sach lien ket don=============="<<endl;
+    xuatLinkList(l);
     return 0;
 }
