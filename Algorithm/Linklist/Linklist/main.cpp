@@ -39,12 +39,8 @@ void themVaoDau(LIST &l, NODE *p){
     // head = 2
     //head = 3
     // tail == 1
-     
-    
-    
-   
-    
 }
+
 void thamVaoCuoi(LIST &l, NODE *p){
     if (l.pHead ==  NULL) {
         l.pHead = l.pHead = p;
@@ -53,12 +49,40 @@ void thamVaoCuoi(LIST &l, NODE *p){
     l.pTail->pNext = p;
     l.pTail = p;
 }
+void themAffter(LIST &l, NODE *p){
+    int x;
+    cout<<"nhap gia tri node q"<<endl;
+    cin>>x;
+    NODE *q = KhoiTaoNode(x);
+    if (q->data == l.pHead->data && l.pHead->pNext== NULL) {
+        thamVaoCuoi(l, p);
+    }else{
+        for (NODE *k = l.pHead; k!= NULL; k = k->pNext) {
+            if (k->data == q->data) {
+                NODE *h = KhoiTaoNode(p->data);
+                NODE * g = k->pNext;
+                h->pNext = g;
+                k->pNext = h;
+                k = k->pNext;
+            }
+        }
+    }
+}
 void xuatLinkList(LIST l){
     for (NODE *k = l.pHead; k!= NULL; k= k->pNext) {
         cout<<"gia tri tung node = "<<k->data<<endl;
     }
    
     
+}
+void finMax(LIST l){
+    int max = 0;
+    for (NODE *k = l.pHead; k!= NULL; k= k->pNext) {
+        if ((k->data) > max) {
+            max = k->data;
+        }
+    }
+    cout<<"so co gia tri lon nhat la "<<max<<endl;
 }
 int main(int argc, const char * argv[]) {
     LIST l;
@@ -73,7 +97,15 @@ int main(int argc, const char * argv[]) {
         NODE *p = KhoiTaoNode(x);
         themVaoDau(l, p);
     }
+    
+    int x;
+    cout<<"nhap gia tri node p can them vao sau"<<endl;
+    cin>>x;
+    NODE *p = KhoiTaoNode(x);
+    themAffter(l, p);
+    
     cout<<"========danh sach lien ket don=============="<<endl;
     xuatLinkList(l);
+    finMax(l);
     return 0;
 }
